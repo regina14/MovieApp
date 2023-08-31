@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.movieapp.navigation.MovieNavigation
 import com.example.movieapp.ui.theme.MovieAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApp {
-                MainContent()
+                MovieNavigation()
             }
         }
     }
@@ -57,46 +58,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp(content: @Composable () -> Unit){
     MovieAppTheme {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = {
-                        Text("Movies")
-                    },
-                    colors = TopAppBarDefaults.mediumTopAppBarColors(Color.Magenta),
-                )
-            }){innerPadding ->
-            Column(
-                modifier = Modifier
-                    .padding(innerPadding),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
-                content()
-            }
-        }
-    }
-}
-
-
-
-@Composable
-fun MainContent(movieList: List<String> = listOf(
-    "Avatar",
-    "300",
-    "Harry Potter",
-    "Life"
-)){
-    Column(
-        modifier = Modifier.padding(12.dp),
-    ) {
-        LazyColumn() {
-            items(movieList){
-                MovieRow(movie = it) {
-                    movie ->
-                    Log.d("TAG", "MainContent: $movie")
-                }
-            }
-        }
+        content()
     }
 }
 
@@ -137,6 +99,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     MyApp {
-        MainContent()
+        MovieNavigation()
     }
 }
